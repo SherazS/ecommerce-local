@@ -1,0 +1,12 @@
+<?php
+foreach ($this->userArray as $row) {
+    foreach($row as $key=>$value) {   
+        echo $key . ": ". $value . "<br />";
+    }
+}
+?>
+
+<a href="<?php echo $this->url(
+    array('controller'=>'user','action'=>'add'),
+    'default',
+    true) ?>" id="link">Add a user</a>

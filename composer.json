@@ -1,0 +1,7 @@
+{
+    "require": {
+        "zendframework/zendframework1": "1.12.*",
+        "propel/propel1": "1.7.*",
+        "pear/log": "dev-master"
+    }
+}

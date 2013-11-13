@@ -1,0 +1,15 @@
+<?php
+foreach ($this->productArray as $row) {
+    foreach($row as $key=>$value) {
+        if($key=='compat') {
+            foreach ($row['compat'] as $compats => $val) {
+                echo $val . ' ';
+            }
+        }
+        else {
+            echo $key . ": ". $value . "<br />";
+        }
+    }
+    echo '<br /><br />';
+}
+?>

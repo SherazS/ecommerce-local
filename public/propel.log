@@ -1,0 +1,30 @@
+Nov 11 11:19:09 propel-mycms [error] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+Nov 11 11:20:46 propel-mycms [error] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+Nov 11 11:20:47 propel-mycms [error] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+Nov 11 11:22:59 propel-mycms [error] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+Nov 11 11:23:03 propel-mycms [error] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+Nov 11 11:26:17 propel-mycms [error] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+Nov 11 11:28:46 propel-mycms [error] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+Nov 11 11:29:53 propel-mycms [error] SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+Nov 11 11:41:32 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:42:06 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:42:12 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:42:13 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:42:13 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:42:14 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:42:31 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:42:48 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:42:51 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:42:52 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:50:04 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:51:14 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:53:21 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 11:53:22 propel-mycms [error] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mycms.cms_article' doesn't exist
+Nov 11 15:26:24 propel-mycms [error] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`mycms`.`cms_article`, CONSTRAINT `category2article` FOREIGN KEY (`art_cat_id`) REFERENCES `cms_category` (`cat_id`))
+Nov 11 15:27:00 propel-mycms [error] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`mycms`.`cms_article`, CONSTRAINT `category2article` FOREIGN KEY (`art_cat_id`) REFERENCES `cms_category` (`cat_id`))
+Nov 11 15:28:13 propel-mycms [error] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`mycms`.`cms_article`, CONSTRAINT `user2article` FOREIGN KEY (`art_user_id`) REFERENCES `user_main` (`user_id`))
+Nov 11 15:28:26 propel-mycms [error] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`mycms`.`cms_article`, CONSTRAINT `user2article` FOREIGN KEY (`art_user_id`) REFERENCES `user_main` (`user_id`))
+Nov 11 15:28:28 propel-mycms [error] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`mycms`.`cms_article`, CONSTRAINT `user2article` FOREIGN KEY (`art_user_id`) REFERENCES `user_main` (`user_id`))
+Nov 11 15:29:08 propel-mycms [error] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`mycms`.`cms_article`, CONSTRAINT `user2article` FOREIGN KEY (`art_user_id`) REFERENCES `user_main` (`user_id`))
+Nov 11 15:29:09 propel-mycms [error] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`mycms`.`cms_article`, CONSTRAINT `user2article` FOREIGN KEY (`art_user_id`) REFERENCES `user_main` (`user_id`))
+Nov 11 15:29:10 propel-mycms [error] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`mycms`.`cms_article`, CONSTRAINT `user2article` FOREIGN KEY (`art_user_id`) REFERENCES `user_main` (`user_id`))

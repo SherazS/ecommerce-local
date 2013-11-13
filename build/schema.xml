@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="induction" defaultIdMethod="native">
+  <table name="product">
+    <column name="product_id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+    <column name="product_category_id" type="TINYINT" required="true"/>
+    <column name="product_name" type="VARCHAR" size="64" required="true"/>
+    <column name="product_image" type="VARCHAR" size="64" required="true"/>
+    <column name="product_description" type="VARCHAR" size="64" required="true"/>
+    <column name="product_price" type="INTEGER" required="true"/>
+    <column name="product_quantity" type="INTEGER" required="true"/>
+    <foreign-key foreignTable="category" name="product_to_category">
+      <reference local="product_category_id" foreign="category_id"/>
+    </foreign-key>
+  </table>
+  <table name="category">
+    <column name="category_id" type="TINYINT" primaryKey="true" required="true" autoIncrement="true"/>
+    <column name="category_name" type="VARCHAR" size="64" required="true"/>
+  </table>
+  <table name="device">
+    <column name="device_id" type="TINYINT" primaryKey="true" required="true" autoIncrement="true"/>
+    <column name="device_name" type="VARCHAR" size="64" required="true"/>
+  </table>
+  <table name="compat">
+    <column name="compat_id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+    <column name="compat_product_id" type="INTEGER" required="true"/>
+    <column name="compat_device_id" type="TINYINT" required="true"/>
+    <foreign-key foreignTable="product" name="product" phpName="Product" refPhpName="Compat">
+      <reference local="compat_product_id" foreign="product_id"/>
+    </foreign-key>
+    <foreign-key foreignTable="device" name="device" phpName="Device" refPhpName="Compat">
+      <reference local="compat_device_id" foreign="device_id"/>
+    </foreign-key>
+  </table>
+  <table name="user">
+    <column name="user_id" type="TINYINT" primaryKey="true" required="true" autoIncrement="true"/>
+    <column name="user_name" type="VARCHAR" size="32" required="true"/>
+    <column name="user_hash" type="VARCHAR" size="64" required="true"/>
+    <column name="user_salt" type="VARCHAR" size="32" required="true"/>
+    <column name="user_email" type="VARCHAR" size="64" required="true"/>
+    <column name="user_type" type="VARCHAR" size="16" required="true"/>
+  </table>
+</database>

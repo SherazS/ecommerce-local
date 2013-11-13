@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+ <log>
+  <ident>propel-induction</ident>
+  <level>7</level>
+ </log>
+ <propel>
+  <datasources default="induction">  
+   <datasource id="induction">
+    <adapter>mysql</adapter>    
+    <connection>
+     <dsn>mysql:host=localhost;dbname=induction</dsn>
+     <user>root</user>
+     <password>sqlpass</password>
+    </connection>    
+   </datasource>   
+  </datasources> 
+ </propel>
+</config>

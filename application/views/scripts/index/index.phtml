@@ -1,0 +1,19 @@
+<?php
+
+function create_hash($password)
+{
+    // format: algorithm:iterations:salt:hash
+    $salt = base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM));
+    return 'Salt: ' . $salt . '<br />' . 
+           'Hash: ' . hash('sha256', $salt . $password);
+}
+
+function retrieve($salt, $password)
+{
+    return hash('sha256', $salt . $password);
+}
+
+echo create_hash('password') . '<br />';
+echo 'Hash: ' . retrieve('zfQMEzdpm7HXsk8yx7l87w==', 'password');
+echo '<br />Hash: be46e8c0974dc0bd5293f98bd9434255cc48353be13466ee6014c6a9810ca882';
+?>

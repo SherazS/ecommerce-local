@@ -1,0 +1,12 @@
+<?php
+foreach ($this->categoryArray as $row) {
+    foreach($row as $key=>$value) {   
+        echo '<a href="' .
+        	$this->url(
+            array('controller'=>'user', 'action' => $value),
+            'default',
+            true) .
+            '">' . $value . '</a><br />';
+    }
+}
+?>
