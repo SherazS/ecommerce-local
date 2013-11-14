@@ -17,22 +17,18 @@ class ProductController extends Zend_Controller_Action
         ->endUse();
         $select = $query->find();
         $productArray = array();
-
+        echo '<pre>' . $select;
+        echo '<br />' . $select[0]->getCompats();
+/*
         foreach($select as $value) {
             $row = array();
             $row['product id'           ] = $value->getProductId();
             $row['product category id'  ] = $value->getProductCategoryId();
             $row['product category name'] = $value->getCategory()->getCategoryName();
             $row['product name'         ] = $value->getProductName();
-/*            $compat = $value->getDevice();
-            $compatArray = array();
-            foreach ($compat as $device) {
-                $getName = $device->getDevice()->getDeviceName();
-                $compatArray[] = $getName;
-             }
-            $row['compat'] = $compatArray;*/
+            $row['test'] = $value->getCompats()->getDevice()->getDeviceName();
             $productArray[] = $row;
-        }
+        }*/
         $this->view->assign('productArray', $productArray);
     }
 
