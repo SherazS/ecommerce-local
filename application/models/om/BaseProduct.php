@@ -61,7 +61,7 @@ abstract class BaseProduct extends BaseObject implements Persistent
 
     /**
      * The value for the product_price field.
-     * @var        int
+     * @var        double
      */
     protected $product_price;
 
@@ -166,7 +166,7 @@ abstract class BaseProduct extends BaseObject implements Persistent
     /**
      * Get the [product_price] column value.
      *
-     * @return int
+     * @return double
      */
     public function getProductPrice()
     {
@@ -297,13 +297,13 @@ abstract class BaseProduct extends BaseObject implements Persistent
     /**
      * Set the value of [product_price] column.
      *
-     * @param  int $v new value
+     * @param  double $v new value
      * @return Product The current object (for fluent API support)
      */
     public function setProductPrice($v)
     {
         if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
+            $v = (double) $v;
         }
 
         if ($this->product_price !== $v) {
@@ -373,7 +373,7 @@ abstract class BaseProduct extends BaseObject implements Persistent
             $this->product_name = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->product_image = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->product_description = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->product_price = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
+            $this->product_price = ($row[$startcol + 5] !== null) ? (double) $row[$startcol + 5] : null;
             $this->product_quantity = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
             $this->resetModified();
 
@@ -679,7 +679,7 @@ abstract class BaseProduct extends BaseObject implements Persistent
                         $stmt->bindValue($identifier, $this->product_description, PDO::PARAM_STR);
                         break;
                     case '`product_price`':
-                        $stmt->bindValue($identifier, $this->product_price, PDO::PARAM_INT);
+                        $stmt->bindValue($identifier, $this->product_price, PDO::PARAM_STR);
                         break;
                     case '`product_quantity`':
                         $stmt->bindValue($identifier, $this->product_quantity, PDO::PARAM_INT);

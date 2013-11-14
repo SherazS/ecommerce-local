@@ -20,8 +20,8 @@ VALUES (
     1,
     'Genuine Samsung Galaxy S4 S-View Premium Cover Case - Black',
     'Ideal for checking the time or screening and answering incoming calls without opening the case. The official Samsung S-View Cover for the Samsung Galaxy S4 is slim and stylish.',
-    'samsunggalaxys4case.png',
-    '3299',
+    'samsunggalaxys4case.jpg',
+    '32.99',
     '119'
     );
 
@@ -37,8 +37,8 @@ VALUES (
     1,
     'Ultra-thin Protective Case for iPhone 5S / 5 - Black',
     'Keep your iPhone 5S / 5 protected from scratches and cosmetic damage with this extremely thin and fantastically lightweight case.',
-    'iphone5case.png',
-    '995',
+    'iphone5case.jpg',
+    '9.95',
     '23'
     );
 
@@ -54,8 +54,8 @@ VALUES (
     2,
     'Genuine Apple Lightning Mains Charger - White',
     'With the Mains Charger, you can keep your iPhone 5 battery topped up at home in white.',
-    'iphone5charger.png',
-    '2995',
+    'iphone5charger.jpg',
+    '29.95',
     '66'
     );
 
@@ -71,8 +71,8 @@ VALUES (
     3,
     'SoundWear SD10 Bluetooth Stereo Headset',
     'The SD10 SoundWear Bluetooth Stereo Headset combines stylish design and modern technology designed for an active lifestyle.',
-    'soundwearheadset.png',
-    '1999',
+    'soundwearheadset.jpg',
+    '19.99',
     '12'
     );
 

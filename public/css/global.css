@@ -1,0 +1,42 @@
+body {
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size: 14px;
+	color: #444;
+}
+
+#header-logo {
+	float: left;
+}
+
+#header-navigation {
+	float: right;
+}
+
+#content {
+	clear: both;
+	width: 900px;
+	border: 2px solid green;
+}
+
+#product-list {
+	width: 684px; /* = 2x(width) + 4x(border+padding+margin) */
+	margin: 0 auto;
+	border: 1px solid red;
+}
+
+.product-item {
+	float: left;
+	border: 1px solid #ccc;
+	padding: 15px;
+	margin: 10px;
+	width: 290px;
+	text-align: center;
+}
+
+.product-name {
+	font-weight: 700;
+}
+
+#notice {
+	clear: both;
+}

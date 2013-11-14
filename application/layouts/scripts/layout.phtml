@@ -5,22 +5,17 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Mini eCommerce Site</title>
   <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
-  <style type="text/css">
-  #link {
-    clear:both;
-    color:red;
-  }
-  </style>
+
 </head>
 <body>
-<div id="header" style="background-color: #EEEEEE;clear:both;">
-    <div id="header-logo" style="float: left">
+<div id="header">
+    <div id="header-logo">
         <a href="<?php echo $this->url(
             array('controller'=>''),
             'default',
             true) ?>">Mini eCommerce Site</a>
     </div>
-    <div id="header-navigation" style="float: right">
+    <div id="header-navigation">
         <a href="<?php echo $this->url(
             array('controller'=>'product'),
             'default',
@@ -34,14 +29,16 @@
             'default',
             true) ?>">Users</a>
     </div>
-    <div id="notice"><br />
-        <span>vagrant ssh</span><br />
-        <span>mysqladmin -u root -psqlpass create mycms</span><br />
-        <span>mysql -u root -psqlpass mycms &lt; /var/www/build/sql/schema.sql</span>
-    </div>
 </div>
  
 <?php echo $this->layout()->content ?>
  
+  <div id="notice"><br />
+      <span>vagrant ssh</span><br />
+      <span>mysqladmin -u root -psqlpass create mycms</span><br />
+      <span>mysql -u root -psqlpass mycms &lt; /var/www/build/sql/schema.sql</span><br />
+      <span>mysql -u root -psqlpass mycms &lt; /var/www/build/sql/load.sql</span><br />
+      <span>sudo apt-get install php5-mcrypt</span>
+  </div>
 </body>
 </html>

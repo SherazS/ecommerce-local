@@ -41,7 +41,7 @@
  * @method Product findOneByProductName(string $product_name) Return the first Product filtered by the product_name column
  * @method Product findOneByProductImage(string $product_image) Return the first Product filtered by the product_image column
  * @method Product findOneByProductDescription(string $product_description) Return the first Product filtered by the product_description column
- * @method Product findOneByProductPrice(int $product_price) Return the first Product filtered by the product_price column
+ * @method Product findOneByProductPrice(double $product_price) Return the first Product filtered by the product_price column
  * @method Product findOneByProductQuantity(int $product_quantity) Return the first Product filtered by the product_quantity column
  *
  * @method array findByProductId(int $product_id) Return Product objects filtered by the product_id column
@@ -49,7 +49,7 @@
  * @method array findByProductName(string $product_name) Return Product objects filtered by the product_name column
  * @method array findByProductImage(string $product_image) Return Product objects filtered by the product_image column
  * @method array findByProductDescription(string $product_description) Return Product objects filtered by the product_description column
- * @method array findByProductPrice(int $product_price) Return Product objects filtered by the product_price column
+ * @method array findByProductPrice(double $product_price) Return Product objects filtered by the product_price column
  * @method array findByProductQuantity(int $product_quantity) Return Product objects filtered by the product_quantity column
  *
  * @package    propel.generator..om

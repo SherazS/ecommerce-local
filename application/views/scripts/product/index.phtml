@@ -1,15 +1,11 @@
 <?php
+echo '<div id="content"><div id="product-list">';
 foreach ($this->productArray as $row) {
-    foreach($row as $key=>$value) {
-        if($key=='compat') {
-            foreach ($row['compat'] as $compats => $val) {
-                echo $val . ' ';
-            }
-        }
-        else {
-            echo $key . ": ". $value . "<br />";
-        }
+    echo '<div class="product-item">';
+    foreach ($row as $key=>$value) {
+            echo '<div class="' . $key . '">' . $value . "</div>";
     }
-    echo '<br /><br />';
+    echo '</div>';
 }
+echo '</div></div>';
 ?>

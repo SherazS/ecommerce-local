@@ -16,7 +16,7 @@ CREATE TABLE `product`
     `product_name` VARCHAR(64) NOT NULL,
     `product_image` VARCHAR(64) NOT NULL,
     `product_description` VARCHAR(64) NOT NULL,
-    `product_price` INTEGER NOT NULL,
+    `product_price` FLOAT NOT NULL,
     `product_quantity` INTEGER NOT NULL,
     PRIMARY KEY (`product_id`),
     INDEX `FI_duct_to_category` (`product_category_id`),

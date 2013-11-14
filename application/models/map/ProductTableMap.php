@@ -43,7 +43,7 @@ class ProductTableMap extends TableMap
         $this->addColumn('product_name', 'ProductName', 'VARCHAR', true, 64, null);
         $this->addColumn('product_image', 'ProductImage', 'VARCHAR', true, 64, null);
         $this->addColumn('product_description', 'ProductDescription', 'VARCHAR', true, 64, null);
-        $this->addColumn('product_price', 'ProductPrice', 'INTEGER', true, null, null);
+        $this->addColumn('product_price', 'ProductPrice', 'FLOAT', true, null, null);
         $this->addColumn('product_quantity', 'ProductQuantity', 'INTEGER', true, null, null);
         // validators
     } // initialize()
