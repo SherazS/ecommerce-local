@@ -1,5 +1,16 @@
 <div id="main">
-<?php
-echo '<pre>' . var_dump($this->test);
-?>
+	<div id="filter-list">
+	<?php
+	//$this->setParam('foo', 'bar');
+	echo '<div class="category-title-div"><span class="category-title">by type</span></div>';
+	foreach ($this->categoryArray as $category) {
+        echo "\n<div class=\"category-link-div\">\n<a href=\"" .
+        	$this->url(
+            array('controller'=>'product', 'action'=>'search'),
+            'default',
+            true) .
+            "/" . $category . "\" class=\"category-link\">" . $category . "</a>\n</div>\n<div class=\"category-link-div\">\n<span class=\"category-separator\">|</span>\n</div>";
+	}
+	?>
+	</div>
 </div>

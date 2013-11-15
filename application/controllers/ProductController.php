@@ -5,7 +5,7 @@ class ProductController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+
     }
 
     public function indexAction()
@@ -17,15 +17,16 @@ class ProductController extends Zend_Controller_Action
         ->endUse()
         ->joinWithCategory();
         $select = $query->find();
+
         $productArray = array();
 
         foreach($select as $product) {
-            $name = '';
             $row = array();
             $row['product-name' ] = $product->getProductName();
             $row['product-image'] = '<img src="/images/' . $product->getProductImage() . '" />';
             $row['product-price'] = '£' . $product->getProductPrice();
             /*
+            $name = '';
             $compats = $product->getCompats();
             foreach ($compats as $device) {
                 $name = $name . ' ' . $device->getDevice()->getDeviceName();
@@ -35,21 +36,57 @@ class ProductController extends Zend_Controller_Action
             $productArray[] = $row;
         }
 
+        $this->view->assign('productArray', $productArray);
+
         $categoryArray = array();
         foreach($select as $product) {
             $categoryArray[] = $product->getCategory()->getCategoryName();
         }
-        $categoryArray = array_unique($categoryArray);
+        $categoryArray = array_unique($categoryArray); // Should this be changed?
+
         $this->view->assign('categoryArray', $categoryArray);
-        $this->view->assign('productArray', $productArray);
-        $this->getRequest()->setParam('test','here');
+
     }
 
     public function searchAction()
     {
-        $this->getRequest()->setParam('foo', 'bar');
-        $uri = $this->getRequest()->getRequestUri();
-        $param = $this->getRequest()->getParam('foo');   
-        echo $uri . '<br /><br />' . $param;
+        $filter = $this->getRequest()->getParam('filter');
+        $query = CategoryQuery::create();
+
+        $selectCategorys = $query->find();
+        $categoryArray = array();
+        foreach($selectCategorys as $category) {
+            $categoryArray[] = $category->getCategoryName();
+        }
+
+        $this->view->assign('categoryArray', $categoryArray);
+
+        $selectFilter = $query
+        ->filterByCategoryName($filter)
+        ->joinWithProduct()
+        ->find();
+
+        $productArray = array();
+        foreach ($selectFilter as $category) {
+            $products = $category->getProducts();
+            foreach ($products as $product) {
+                $row = array();
+                $row['product-name' ] = $product->getProductName();
+                $row['product-image'] = '<img src="/images/' . $product->getProductImage() . '" />';
+                $row['product-price'] = '£' . $product->getProductPrice();
+                /*
+                $name = '';
+                $compats = $product->getCompats();
+                foreach ($compats as $device) {
+                    $name = $name . ' ' . $device->getDevice()->getDeviceName();
+                    $row['product-compatibility'] = $name;
+                }
+                */
+                $productArray[] = $row;
+            }
+        }
+
+        $this->view->assign('productArray', $productArray);
+
     }
 }
