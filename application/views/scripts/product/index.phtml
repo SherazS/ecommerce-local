@@ -6,14 +6,12 @@
 	foreach ($this->categoryArray as $category) {
         echo "\n<div class=\"category-link-div\">\n<a href=\"" .
         	$this->url(
-            array('controller'=>'product', 'action'=>'search'),
+            array('controller'=>'product', 'action'=>''),
             'default',
-            true) .
-            "/" . $category . "\" class=\"category-link\">" . $category . "</a>\n</div>\n<div class=\"category-link-div\">\n<span class=\"category-separator\">|</span>\n</div>";
+            true) . $category . "\" class=\"category-link\">" . $category . "</a>\n</div>\n<div class=\"category-link-div\">\n<span class=\"category-separator\">|</span>\n</div>";
 	}
 	?>
 	</div>
-
 
 	<div id="product-list">
 	<?php

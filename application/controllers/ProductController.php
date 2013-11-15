@@ -10,6 +10,8 @@ class ProductController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $filter = $this->getRequest()->getParam('filter');
+        if($filter) {$this->_forward('search');}
         $query = ProductQuery::create()
         ->joinWithCompat()
         ->useCompatQuery()
@@ -66,6 +68,9 @@ class ProductController extends Zend_Controller_Action
         ->joinWithProduct()
         ->find();
 
+        // die(var_dump($selectFilter->getFirst()));
+        // use this to avoid bad querys
+
         $productArray = array();
         foreach ($selectFilter as $category) {
             $products = $category->getProducts();
@@ -74,14 +79,6 @@ class ProductController extends Zend_Controller_Action
                 $row['product-name' ] = $product->getProductName();
                 $row['product-image'] = '<img src="/images/' . $product->getProductImage() . '" />';
                 $row['product-price'] = '£' . $product->getProductPrice();
-                /*
-                $name = '';
-                $compats = $product->getCompats();
-                foreach ($compats as $device) {
-                    $name = $name . ' ' . $device->getDevice()->getDeviceName();
-                    $row['product-compatibility'] = $name;
-                }
-                */
                 $productArray[] = $row;
             }
         }

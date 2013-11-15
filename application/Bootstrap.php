@@ -18,7 +18,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initRoute()
     {
         $router = Zend_Controller_Front::getInstance()->getRouter();
-        $router->addRoute('productsearch', new Zend_Controller_Router_Route(
+        $router->addRoute('filterslash', new Zend_Controller_Router_Route(
+            'product/:filter',
+             array('controller' => 'product', 'action' => 'index')
+        ));
+        $router->addRoute('filterindex', new Zend_Controller_Router_Route(
+            'product/index/:filter',
+             array('controller' => 'product', 'action' => 'index')
+        ));
+        $router->addRoute('filtersearch', new Zend_Controller_Router_Route(
             'product/search/:filter',
              array('controller' => 'product', 'action' => 'search')
         ));
