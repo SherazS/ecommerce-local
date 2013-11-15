@@ -8,30 +8,37 @@
 
 </head>
 <body>
-<div id="header">
-    <div id="header-logo">
-        <a href="<?php echo $this->url(
-            array('controller'=>''),
-            'default',
-            true) ?>">Mini eCommerce Site</a>
-    </div>
-    <div id="header-navigation">
-        <a href="<?php echo $this->url(
-            array('controller'=>'product'),
-            'default',
-            true) ?>">Products</a>
-        <a href="<?php echo $this->url(
-            array('controller'=>'category'),
-            'default',
-            true) ?>">Categories</a>
-        <a href="<?php echo $this->url(
-            array('controller'=>'user'),
-            'default',
-            true) ?>">Users</a>
-    </div>
-</div>
+<div id="content">
+  <div id="header">
+      <div id="logo-div">
+          <a href="<?php echo $this->url(
+              array('controller'=>''),
+              'default',
+              true) ?>" id="logo-link">Mini eCommerce Site</a>
+      </div>
+      <div id="nav-div">
+        <div class="nav-item">
+          <a href="<?php echo $this->url(
+              array('controller'=>'product'),
+              'default',
+              true) ?>" class="nav-link">Products</a>
+          </div>
+          <div class="nav-item">
+          <a href="<?php echo $this->url(
+              array('controller'=>'category'),
+              'default',
+              true) ?>" class="nav-link">Categories</a>
+          </div>
+          <div class="nav-item">
+          <a href="<?php echo $this->url(
+              array('controller'=>'user'),
+              'default',
+              true) ?>" class="nav-link">Accounts</a>
+          </div>
+      </div>
+  </div>
  
-<?php echo $this->layout()->content ?>
+  <?php echo $this->layout()->content ?>
  
   <div id="notice"><br />
       <span>vagrant ssh</span><br />
@@ -40,5 +47,6 @@
       <span>mysql -u root -psqlpass mycms &lt; /var/www/build/sql/load.sql</span><br />
       <span>sudo apt-get install php5-mcrypt</span>
   </div>
+</div>
 </body>
 </html>

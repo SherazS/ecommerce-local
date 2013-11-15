@@ -19,8 +19,8 @@ CREATE TABLE `product`
     `product_price` FLOAT NOT NULL,
     `product_quantity` INTEGER NOT NULL,
     PRIMARY KEY (`product_id`),
-    INDEX `FI_duct_to_category` (`product_category_id`),
-    CONSTRAINT `product_to_category`
+    INDEX `FI_egory` (`product_category_id`),
+    CONSTRAINT `category`
         FOREIGN KEY (`product_category_id`)
         REFERENCES `category` (`category_id`)
 ) ENGINE=InnoDB;

@@ -14,29 +14,42 @@ class ProductController extends Zend_Controller_Action
         ->joinWithCompat()
         ->useCompatQuery()
         ->joinWithDevice()
-        ->endUse();
+        ->endUse()
+        ->joinWithCategory();
         $select = $query->find();
         $productArray = array();
 
-        foreach($select as $item) {
+        foreach($select as $product) {
             $name = '';
             $row = array();
-            $row['product-name' ] = $item->getProductName();
-            $row['product-image'] = '<img src="images/' . $item->getProductImage() . '" />';
-            $row['product-price'] = '£' . $item->getProductPrice();
-
-            /*$compats = $item->getCompats();
+            $row['product-name' ] = $product->getProductName();
+            $row['product-image'] = '<img src="/images/' . $product->getProductImage() . '" />';
+            $row['product-price'] = '£' . $product->getProductPrice();
+            /*
+            $compats = $product->getCompats();
             foreach ($compats as $device) {
                 $name = $name . ' ' . $device->getDevice()->getDeviceName();
                 $row['product-compatibility'] = $name;
-            }*/
+            }
+            */
             $productArray[] = $row;
-
         }
+
+        $categoryArray = array();
+        foreach($select as $product) {
+            $categoryArray[] = $product->getCategory()->getCategoryName();
+        }
+        $categoryArray = array_unique($categoryArray);
+        $this->view->assign('categoryArray', $categoryArray);
         $this->view->assign('productArray', $productArray);
+        $this->getRequest()->setParam('test','here');
     }
 
-    public function addAction()
+    public function searchAction()
     {
+        $this->getRequest()->setParam('foo', 'bar');
+        $uri = $this->getRequest()->getRequestUri();
+        $param = $this->getRequest()->getParam('foo');   
+        echo $uri . '<br /><br />' . $param;
     }
 }

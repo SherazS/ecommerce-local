@@ -8,7 +8,7 @@
     <column name="product_description" type="VARCHAR" size="64" required="true"/>
     <column name="product_price" type="FLOAT" required="true"/>
     <column name="product_quantity" type="INTEGER" required="true"/>
-    <foreign-key foreignTable="category" name="product_to_category">
+    <foreign-key foreignTable="category" name="category" phpName="Category" refPhpName="Product">
       <reference local="product_category_id" foreign="category_id"/>
     </foreign-key>
   </table>

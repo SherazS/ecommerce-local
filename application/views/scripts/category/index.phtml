@@ -1,12 +1,5 @@
+<div id="main">
 <?php
-foreach ($this->categoryArray as $row) {
-    foreach($row as $key=>$value) {   
-        echo '<a href="' .
-        	$this->url(
-            array('controller'=>'user', 'action' => $value),
-            'default',
-            true) .
-            '">' . $value . '</a><br />';
-    }
-}
+echo '<pre>' . var_dump($this->test);
 ?>
+</div>
