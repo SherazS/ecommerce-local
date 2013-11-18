@@ -1,27 +1,5 @@
 <div id="main">
 	<div id="filter-list">
-	<?php
-	//$this->setParam('foo', 'bar');
-	echo '<div class="category-title-div"><span class="category-title">by type</span></div>';
-	foreach ($this->categoryArray as $category) {
-        echo "\n<div class=\"category-link-div\">\n<a href=\"" .
-        	$this->url(
-            array('controller'=>'product', 'action'=>''),
-            'default',
-            true) . $category . "\" class=\"category-link\">" . $category . "</a>\n</div>\n<div class=\"category-link-div\">\n<span class=\"category-separator\">|</span>\n</div>";
-	}
-	?>
-	</div>
-
-	<div id="product-list">
-	<?php
-	foreach ($this->productArray as $product) {
-	    echo '<div class="product-item">';
-	    foreach ($product as $columnName=>$columnValue) {
-	            echo '<div class="' . $columnName . '">' . $columnValue . "</div>\n";
-	    }
-	    echo "</div>\n";
-	}
-	?>
+		<p>Nothing added yet.</p>
 	</div>
 </div>

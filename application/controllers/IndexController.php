@@ -9,86 +9,140 @@ class IndexController extends Zend_Controller_Action
     }
 
     public function indexAction()
-    {/*
-        $c = new Criteria();
-        $c->setLimit(10);
+    {
+        $type = $this->getRequest()->getParam('type');
+        $device = $this->getRequest()->getParam('device');
 
-        $select  = ProductPeer::doSelect($c);
+        if($type) {$this->_forward('search');}
+        $query = ProductQuery::create()
+        ->joinWithCompat()
+            ->useCompatQuery()
+                ->joinWithDevice()
+            ->endUse()
+        ->joinWithCategory();
 
-        echo "<br /><br /><br /><br /><p>Products</p>";
+        $select = $query->find();      
 
         $productArray = array();
 
-        foreach($select as $value) {
+        foreach($select as $product) {
             $row = array();
-            $row['product id'           ] = $value->getProductId();
-            $row['product category id'  ] = $value->getProductCategoryId();
-            $row['product category name'] = $value->getCategory()->getCategoryName();
-            $row['product name'         ] = $value->getProductName();
-            $compat = CompatQuery::create()->filterByCompatProductId($value->getProductId())->find();
-            $row['compatibility'] = '';
-            foreach ($compat as $device) {
-                $row['compatibility'] = $row['compatibility'] . $device->getDevice()->getDeviceName() . ' ';
-             } 
-
+            $row['product-name' ] = $product->getProductName();
+            $row['product-image'] = '<img src="/images/' . $product->getProductImage() . '" />';
+            $row['product-price'] = '£' . $product->getProductPrice();
+            /*
+            $name = '';
+            $compats = $product->getCompats();
+            foreach ($compats as $device) {
+                $name = $name . ' ' . $device->getDevice()->getDeviceName();
+                $row['product-compatibility'] = $name;
+            }
+            */
             $productArray[] = $row;
         }
-        foreach ($productArray as $row) {
-            foreach($row as $key=>$value) {   
-                echo $key . ": ". $value . "<br />";
-            }
-            echo "<br />";
+
+        $this->view->assign('productArray', $productArray);
+
+        $typeArray = array();
+        foreach($select as $product) {
+            $typeArray[] = $product->getCategory()->getCategoryName();
         }
+        $typeArray = array_unique($typeArray); // Should this be changed?
 
-        $select  = CategoryPeer::doSelect($c);
-
-        echo "<p>Categories</p>";
-
-        $categoryArray = array();
-
-        foreach($select as $value) {
-            $row = array();
-            $row['category id'  ] = $value->getCategoryId();
-            $row['category name'] = $value->getCategoryName();
-            
-            $categoryArray[] = $row;
-        }
-        foreach ($categoryArray as $row) {
-            foreach($row as $key=>$value) {   
-                echo $key . ": ". $value . "<br />";
-            }
-            echo "<br />";
-        }
-
-        $select  = DevicePeer::doSelect($c);
-
-        echo "<p>Devices</p>";
+        $this->view->assign('typeArray', $typeArray);
 
         $deviceArray = array();
 
-        foreach($select as $value) {
-            $row = array();
-            $row['device id'  ] = $value->getDeviceId();
-            $row['device name'] = $value->getDeviceName();
-            
-            $deviceArray[] = $row;
-        }
-        foreach ($deviceArray as $row) {
-            foreach($row as $key=>$value) {   
-                echo $key . ": ". $value . "<br />";
+        foreach ($select as $compats) {
+            $compats = $compats->getCompats();
+            foreach ($compats as $deviceName) {
+                $deviceName = $deviceName->getDevice()->getDeviceName();
+                $deviceArray[] = $deviceName;
+                //var_dump($var);
             }
-            echo "<br />";
         }
+        $deviceArray = array_unique($deviceArray);
 
-/*
-        $new2 = new CmsCategory();
-        $new2->setCatName('Newer');
+        $this->view->assign('deviceArray', $deviceArray);
+        /*
         $new3 = new UserMain();
         $new3->setUserId(321);
         $new3->setUserName('Jack');
         $new3->setUserPass('SECRET');
         $new3->setUserEmail('jack@email.com');
-*/
+        */
+    }
+
+    public function searchAction()
+    {
+        // GET PRODUCT IDS FROM DEVICE AND FROM CATEGORY
+        // THEN USE ARRAY INTERSECT TO FIND COMMON IDS
+        // THEN QUERY PRODUCT TABLE FILTERBYID
+
+        // get and set parameters
+        $typeParam = $this->getRequest()->getParam('type');
+        $deviceParam = $this->getRequest()->getParam('device');
+        $this->view->assign('selectedType', $typeParam);
+        $this->view->assign('selectedDevice', $deviceParam);
+
+        $categoryQuery = CategoryQuery::create();
+
+        $selectTypes = $categoryQuery->find();
+        $typeArray = array();
+        foreach($selectTypes as $category) {
+            $typeArray[] = $category->getCategoryName();
+        }
+
+        $this->view->assign('typeArray', $typeArray);
+
+        $selectProductsByType = $categoryQuery
+        ->filterByCategoryName($typeParam)
+        ->joinWithProduct()
+        ->find();
+
+        // $selectFilter->getFirst()
+        // use this to avoid bad querys
+
+        $productArray = array();
+        foreach ($selectProductsByType as $category) {
+            $products = $category->getProducts();
+            foreach ($products as $product) {
+                $row = array();
+                $row['product-name' ] = $product->getProductName();
+                $row['product-image'] = '<img src="/images/' . $product->getProductImage() . '" />';
+                $row['product-price'] = '£' . $product->getProductPrice();
+                $productArray[] = $row;
+            }
+        }
+
+        $this->view->assign('productArray', $productArray);
+
+
+        $deviceQuery = DeviceQuery::create();
+
+        $selectDevices = $deviceQuery->find();
+        $deviceArray = array();
+        foreach($selectDevices as $device) {
+            $deviceArray[] = $device->getDeviceName();
+        }
+
+        $this->view->assign('deviceArray', $deviceArray);
+            if ($deviceParam) {
+            $selectProductsByDevice = $deviceQuery
+            ->filterByDeviceName($deviceParam)
+            ->joinWithCompat()
+                ->useCompatQuery()
+                    ->joinWithProduct()
+                ->endUse()
+            ->find();
+        }
+        else {
+            $selectProductsByDevice = "nothing";
+        }
+
+        echo '<pre>' . $selectProductsByDevice;
+        // $selectFilter->getFirst()
+        // use this to avoid bad querys
 
     }
 }
