@@ -2,13 +2,13 @@
 	<div id="filter-list">
 	<?php
 	// echo $this->foo;
-	echo '<div class="filter-title-div"><span class="filter-title">by type</span></div>';
-	foreach ($this->typeArray as $type) {
+	echo '<div class="filter-title-div"><span class="filter-title">by category</span></div>';
+	foreach ($this->categoryArray as $category) {
 		$style = '';
 		$url = $this->selectedDevice;
-		$action = $type;
+		$action = $category;
 
-		if ($type == $this->selectedType) {
+		if ($category == $this->selectedCategory) {
         	$style = ' style="border-bottom: 2px solid #444;"';
         	$action = 'all';
         }
@@ -21,7 +21,7 @@
 
         echo $style;
 
-        echo ">" . $type . "</a>\n</div>\n<div class=\"filter-link-div\">\n<span class=\"filter-separator\">|</span>\n</div>";
+        echo ">" . $category . "</a>\n</div>\n<div class=\"filter-link-div\">\n<span class=\"filter-separator\">|</span>\n</div>";
 	}
 	?>
 	</div>
@@ -40,8 +40,8 @@
         }
 		
 
-		if($this->selectedType) {
-			$action = $this->selectedType;
+		if($this->selectedCategory) {
+			$action = $this->selectedCategory;
 		}
 
         echo "\n<div class=\"filter-link-div\">\n<a href=\"" . 
@@ -59,12 +59,17 @@
 
 	<div id="product-list">
 	<?php
-	foreach ($this->productArray as $product) {
-	    echo '<div class="product-item">';
-	    foreach ($product as $columnName=>$columnValue) {
-	            echo '<div class="' . $columnName . '">' . $columnValue . "</div>\n";
-	    }
-	    echo "</div>\n";
+	if(is_array($this->productArray)) {
+		foreach ($this->productArray as $product) {
+		    echo '<div class="product-item">';
+		    foreach ($product as $columnName=>$columnValue) {
+		            echo '<div class="' . $columnName . '">' . $columnValue . "</div>\n";
+		    }
+		    echo "</div>\n";
+		}
+	}
+	else {
+		echo $this->productArray;
 	}
 	?>
 	</div>

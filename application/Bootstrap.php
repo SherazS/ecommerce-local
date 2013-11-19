@@ -19,30 +19,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $router = Zend_Controller_Front::getInstance()->getRouter();
 
-        $router->addRoute('typeslash', new Zend_Controller_Router_Route(
-            'index/:type/',
+        $router->addRoute('categoryslash', new Zend_Controller_Router_Route(
+            'index/:category/',
              array('controller' => 'index', 'action' => 'index')
         ));
-        $router->addRoute('typeindex', new Zend_Controller_Router_Route(
-            'index/index/:type/',
+        $router->addRoute('categoryindex', new Zend_Controller_Router_Route(
+            'index/index/:category/',
              array('controller' => 'index', 'action' => 'index')
-        ));
-        $router->addRoute('typesearch', new Zend_Controller_Router_Route(
-            'index/search/:type/',
-             array('controller' => 'index', 'action' => 'search')
         ));
 
         $router->addRoute('deviceslash', new Zend_Controller_Router_Route(
-            'index/:type/:device',
+            'index/:category/:device',
              array('controller' => 'index', 'action' => 'index')
         ));
         $router->addRoute('deviceindex', new Zend_Controller_Router_Route(
-            'index/index/:type/:device',
+            'index/index/:category/:device',
              array('controller' => 'index', 'action' => 'index')
-        ));
-        $router->addRoute('devicesearch', new Zend_Controller_Router_Route(
-            'index/search/:type/:device',
-             array('controller' => 'index', 'action' => 'search')
         ));
     }    
 }
