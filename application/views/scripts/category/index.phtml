@@ -1,15 +1,28 @@
 <div id="main">
 	<div id="filter-list">
 	<?php
-	//$this->setParam('foo', 'bar');
-	echo '<div class="category-title-div"><span class="category-title">by type</span></div>';
+	// echo $this->foo;
+	echo '<div class="filter-title-div"><span class="filter-title">by category</span></div>';
 	foreach ($this->categoryArray as $category) {
-        echo "\n<div class=\"category-link-div\">\n<a href=\"" .
+        echo "\n<div class=\"filter-link-div\">\n<a href=\"" .
         	$this->url(
-            array('controller'=>'product', 'action'=>'search'),
+            array('controller'=>'index', 'action'=> $category),
             'default',
-            true) .
-            "/" . $category . "\" class=\"category-link\">" . $category . "</a>\n</div>\n<div class=\"category-link-div\">\n<span class=\"category-separator\">|</span>\n</div>";
+            true) . "\" class=\"filter-link\">" . $category . "</a>\n</div>\n<div class=\"filter-link-div\">\n<span class=\"filter-separator\">|</span>\n</div>";
+	}
+	?>
+	</div>
+
+	<div id="filter-list">
+	<?php
+	// echo $this->foo;
+	echo '<div class="filter-title-div"><span class="filter-title">by device</span></div>';
+	foreach ($this->deviceArray as $device) {
+        echo "\n<div class=\"filter-link-div\">\n<a href=\"" . 
+        	$this->url(
+            array('controller'=>'index', 'action'=> 'all'),
+            'default',
+            true) . '/' . $device . "\" class=\"filter-link\">" . $device . "</a>\n</div>\n<div class=\"filter-link-div\">\n<span class=\"filter-separator\">|</span>\n</div>";
 	}
 	?>
 	</div>

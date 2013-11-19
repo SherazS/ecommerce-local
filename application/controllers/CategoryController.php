@@ -10,10 +10,21 @@ class CategoryController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $query = CategoryQuery::create();
+        // query all device names and assign to list as search options
+        $deviceQuery = DeviceQuery::create();
 
-        $selectCategorys = $query->find();
-        $categoryArray = array();
+        $selectDevices = $deviceQuery->find();
+        $deviceArray = array();
+        foreach($selectDevices as $device) {
+            $deviceArray[] = $device->getDeviceName();
+        }
+
+        $this->view->assign('deviceArray', $deviceArray);
+
+        // query all category names and assign to list as search options
+        $categoryQuery = CategoryQuery::create();
+
+        $selectCategorys = $categoryQuery->find();
         foreach($selectCategorys as $category) {
             $categoryArray[] = $category->getCategoryName();
         }
