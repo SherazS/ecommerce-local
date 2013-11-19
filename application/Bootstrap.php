@@ -19,6 +19,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $router = Zend_Controller_Front::getInstance()->getRouter();
 
+        // category search routers
         $router->addRoute('categoryslash', new Zend_Controller_Router_Route(
             'index/:category/',
              array('controller' => 'index', 'action' => 'index')
@@ -28,6 +29,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
              array('controller' => 'index', 'action' => 'index')
         ));
 
+        // device search routers
         $router->addRoute('deviceslash', new Zend_Controller_Router_Route(
             'index/:category/:device',
              array('controller' => 'index', 'action' => 'index')
@@ -35,6 +37,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute('deviceindex', new Zend_Controller_Router_Route(
             'index/index/:category/:device',
              array('controller' => 'index', 'action' => 'index')
+        ));
+
+        // edit user profile router
+        $router->addRoute('useredit', new Zend_Controller_Router_Route(
+            'user/edit/:user_id',
+             array('controller' => 'user', 'action' => 'edit')
         ));
     }    
 }

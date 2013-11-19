@@ -13,7 +13,7 @@ class Application_Form_User extends Zend_Form
         $this->addElement('text', 'username', array(
             'label'      => 'Enter username (max 20 characters):',
             'required'   => true,
-            'value'      => 'username',
+            'value'      => 'Enter username',
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array(0, 20))
                 )
@@ -23,7 +23,6 @@ class Application_Form_User extends Zend_Form
         $this->addElement('password', 'enterpassword', array(
             'label'      => 'Enter password (min 6 characters):',
             'required'   => true,
-            'value'      => 'username',
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array('min'=> 6))
                 )
@@ -32,7 +31,6 @@ class Application_Form_User extends Zend_Form
         $this->addElement('password', 'confirmpassword', array(
             'label'      => 'Confirm password (min 6 characters):',
             'required'   => true,
-            'value'      => 'username',
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array('min'=>6)),
                 array('validator' => 'Identical', 'options' => array('token' => 'enterpassword'))
@@ -54,9 +52,8 @@ class Application_Form_User extends Zend_Form
         $this->addElement('radio', 'type', array(
             'label' => 'Select user type:',
             'required' => true,
-            'value'      => 'standard',
             'multiOptions'=>array(
-                'admin' => 'Administrator',
+                'administrator' => 'Administrator',
                 'standard' => 'Standard',
             ),
         ));
