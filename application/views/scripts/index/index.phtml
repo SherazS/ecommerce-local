@@ -1,33 +1,42 @@
 <div id="main">
 	<div id="filter-list">
-	<?php
-	echo '<div class="filter-title-div"><span class="filter-title">by category</span></div>';
-	foreach ($this->categoryArray as $category) {
-		$style = '';
-		$url = $this->selectedDevice;
-		$action = $category;
+		<div class="filter-title-div"><span class="filter-title">by category</span></div>
+		<?php
+		foreach ($this->categoryArray as $category):
+			$style = '';
+			$url = $this->selectedDevice;
+			$action = $category;
+			if ($category == $this->selectedCategory) {
+	        	$style = ' style="border-bottom: 2px solid #444;"';
+	        	$action = 'all';
+	        }
+	        if ($category == $this->selectedCategory) {
+	        	$style = ' style="border-bottom: 2px solid #444;"';
+	        	$action = 'all';
+	        }
+		?>
 
-		if ($category == $this->selectedCategory) {
-        	$style = ' style="border-bottom: 2px solid #444;"';
-        	$action = 'all';
-        }
-
-        echo "\n<div class=\"filter-link-div\">\n<a href=\"" .
-        	$this->url(
+        <div class="filter-link-div">
+        	<a href="
+			<?php
+			echo $this->url(
             array('controller'=>'index', 'action'=> $action),
-            'default',true) . '/' . $url . "\" class=\"filter-link\"";
+            'default',true) . '/' . $url; ?>" class="filter-link";
 
-        echo $style;
+        	<?php echo $style . ">" . $category; ?>
 
-        echo ">" . $category . "</a>\n</div>\n<div class=\"filter-link-div\">\n<span class=\"filter-separator\">|</span>\n</div>";
-	}
-	?>
+        	</a>
+        </div>
+        <div class="filter-link-div">
+        	<span class="filter-separator">|</span>
+        </div>
+		<?php endforeach; ?>
 	</div>
 
 	<div id="filter-list">
+	<div class="filter-title-div"><span class="filter-title">by device</span></div>
 	<?php
-	echo '<div class="filter-title-div"><span class="filter-title">by device</span></div>';
-	foreach ($this->deviceArray as $device) {
+	foreach ($this->deviceArray as $device):
 		$style = '';
 		$url = $device;
 		$action = 'all';
@@ -35,22 +44,24 @@
         	$style = 'style="border-bottom: 2px solid #444;"';
         	$url = '';
         }
-		
 
 		if($this->selectedCategory) {
 			$action = $this->selectedCategory;
 		}
-
-        echo "\n<div class=\"filter-link-div\">\n<a href=\"" . 
-        	$this->url(
-            array('controller'=>'index', 'action'=> $action),
-            'default',true) . '/' . $url . "\" class=\"filter-link\"";
-
-        echo $style;
-
-        echo ">" . $device . "</a>\n</div>\n<div class=\"filter-link-div\">\n<span class=\"filter-separator\">|</span>\n</div>";
-	}
 	?>
+	<div class="filter-link-div">
+		<a href="
+	<?php echo $this->url(
+            array('controller'=>'index', 'action'=> $action),
+            'default',true) . '/' . $url;?>" class="filter-link"
+
+        <?php echo $style . ">" . $device; ?>
+   		</a>
+	</div>
+	<div class="filter-link-div">
+		<span class="filter-separator">|</span>
+	</div>
+	<?php endforeach;?>
 	</div>
 
 	<div id="product-list">
@@ -94,7 +105,6 @@
 	else {
 		echo $this->productArray;
 	}
-
 	?>
 	</div>
 </div>

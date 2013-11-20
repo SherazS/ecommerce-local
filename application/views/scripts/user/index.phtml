@@ -19,7 +19,10 @@
 	<?php
 	foreach ($this->userArray as $row) {
 		echo '<div class="user-item">';
-	    foreach($row as $key=>$value) {   
+
+		// foreach user print username
+		// and create edit/delete urls with user ids
+	    foreach($row as $key=>$value) {
 	    	if ($key == 'user-name') {
 		        echo '<div class="' . $key . '-div"><span class="' . $key . '-span">' .
 		        	$value . '</span></div>';
