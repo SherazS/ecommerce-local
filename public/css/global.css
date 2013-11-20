@@ -15,9 +15,9 @@ a:link, a:visited, a:hover, a:active {
 }
 
 #form-div {
-	width: 461px;
+	width: 451px;
 	margin: 0 auto;
-	border: 1px solid #ccc;
+	border: 6px solid #222;
 	padding: 10px;
 }
 
@@ -157,10 +157,11 @@ a:link, a:visited, a:hover, a:active {
 	border: 1px solid #ccc;
 }
 
-.user-add-div {
-	width: 123px;
+.user-function-div {
+	width: 130px;
 	margin: 0 auto;
 	font-size: 20px;
+	text-align: center;
 }
 
 .user-link-div a, .product-name a {
@@ -170,8 +171,4 @@ a:link, a:visited, a:hover, a:active {
 
 .product-price a {
 	color: #fff;
-}
-
-#notice {
-	clear: both;
 }

@@ -28,7 +28,7 @@ class UserController extends Zend_Controller_Action
     {
         // create blank application form
         $request = $this->getRequest();
-        $form    = new Application_Form_User();
+        $form = new Application_Form_User();
  
         // if the form is submitted and the inputs are valid
         // retrieve input data
@@ -42,16 +42,23 @@ class UserController extends Zend_Controller_Action
                 $salt = base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM));
                 $hash = hash('sha256', $salt . $password);
 
-                $new = new User();
-                $new->setUserName($username);
-                $new->setUserHash($hash);
-                $new->setUserSalt($salt);
-                $new->setUserEmail($email);
-                $new->setUserType($type);
-                $new->save();
+                $findUser = UserQuery::create()->findOneByUserName($username);
+                if ($findUser) {
+                    $this->view->assign('userName', $username);
+                    $this->view->assign('status', 'exists');
+                }
+                else {
+                    $newUser = new User();
+                    $newUser->setUserName($username);
+                    $newUser->setUserHash($hash);
+                    $newUser->setUserSalt($salt);
+                    $newUser->setUserEmail($email);
+                    $newUser->setUserType($type);
+                    $newUser->save();
 
-                $this->view->assign('userName', $username);
-                $this->view->assign('done', ' added');
+                    $this->view->assign('userName', $username);
+                    $this->view->assign('status', 'added');
+                }
             }
         }
         $this->view->assign('form', $form);
@@ -87,15 +94,22 @@ class UserController extends Zend_Controller_Action
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $newUserName = $request->getPost('username');
-                $newUserEmail = $request->getPost('email');
-                $newUserType = $request->getPost('type');
+                $findUser = UserQuery::create()->findOneByUserName($newUserName);
+                if ($findUser) {
+                    $this->view->assign('userName', $newUserName);
+                    $this->view->assign('status', 'exists');
+                }
+                else {
+                    $newUserEmail = $request->getPost('email');
+                    $newUserType = $request->getPost('type');
 
-                $userQuery->setUserName($newUserName);
-                $userQuery->setUserEmail($newUserEmail);
-                $userQuery->setUserType($newUserType);
-                $userQuery->save();
-                $this->view->assign('userName', $newUserName);
-                $this->view->assign('done', ' amended');
+                    $userQuery->setUserName($newUserName);
+                    $userQuery->setUserEmail($newUserEmail);
+                    $userQuery->setUserType($newUserType);
+                    $userQuery->save();
+                    $this->view->assign('userName', $newUserName);
+                    $this->view->assign('status', 'amended');
+                }
             }
         }
         $this->view->assign('form', $form);  
@@ -113,9 +127,8 @@ class UserController extends Zend_Controller_Action
 
         $userName = $userQuery->getUserName();
         $this->view->assign('userName', $userName);  
-        // if the form is submitted and the inputs are valid
-        // retrieve input data
-        // edit selected user's row and with input data
+
+        // if the form is submitted delete users row
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $userQuery->delete();
@@ -123,5 +136,54 @@ class UserController extends Zend_Controller_Action
             }
         }
         $this->view->assign('form', $form); 
+    }
+
+    public function loginAction()
+    {
+        $request = $this->getRequest();
+        $form = new Application_Form_User();
+
+        // remove everything except username and password
+        $form->getElement('username')->setLabel('Enter username:')->setValue('');
+        $form->getElement('enterpassword')->setLabel('Enter password:');
+        $form->getElement('submit')->setLabel('Log in');
+        $form->removeElement('confirmpassword');
+        $form->removeElement('captcha');
+        $form->removeElement('type');
+        $form->removeElement('email');
+
+        // if the form is submitted and the inputs are valid
+        // compare attempted hash with actual hash
+        // print message accordingly
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $username = $request->getPost('username');
+                $password = $request->getPost('enterpassword');
+
+                $findUser = UserQuery::create()->findOneByUserName($username);
+
+                // if user name exists
+                if ($findUser) {
+                    $salt = $findUser->getUserSalt();
+                    $actualHash = $findUser->getUserHash();
+
+                    $attemptedHash = hash('sha256', $salt . $password);
+                    // correct username and password
+                    if ($actualHash === $attemptedHash) {
+                        $this->view->assign('success', '');
+                    }
+                    // incorrect password
+                    else {
+                        $this->view->assign('failure', '');
+                    }
+                }
+                // incorrect username
+                else {
+                    $this->view->assign('failure', '');
+                }
+            }
+        }
+        $this->view->assign('form', $form);  
+
     }
 }

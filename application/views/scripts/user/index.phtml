@@ -1,11 +1,19 @@
 <div id="main">
-	<div class="user-link-div user-add-div">
+	<div class="user-link-div user-function-div">
 		<a href="
 		<?php
 			echo $this->url(
 			    array('controller'=>'user','action'=>'add'),'default',true
 			    )
 	    ?>">Add new user</a>
+	</div>
+	<div class="user-link-div user-function-div">
+		<a href="
+		<?php
+			echo $this->url(
+			    array('controller'=>'user','action'=>'login'),'default',true
+			    )
+	    ?>">Log in</a>
 	</div>
 	<div id="user-list">
 	<?php

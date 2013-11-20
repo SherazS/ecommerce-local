@@ -55,7 +55,8 @@
 
 	<div id="product-list">
 	<?php
-
+	// class that retrieves and stores product id
+	// for reuse as URL across multiple product items
 	class Url {
 		protected $id;
 
@@ -73,6 +74,8 @@
 		    echo '<div class="product-item">';
 
 		    foreach ($product as $columnName=>$columnValue) {
+		    	// if product-id is retrieved store it
+		    	// else print product properties
 			    if ($columnName == 'product-id') {
 					$productUrl = new Url($columnValue);
 		    		$productUrl = $productUrl->createUrl();

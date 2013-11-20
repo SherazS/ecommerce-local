@@ -3,12 +3,25 @@
 	<?php
 	// if action completed display success message
 	// else display form
-	if ($this->done) {
-		echo $this->userName . $this->done;
-	}
-	else {
-		$this->form->setAction($this->url());
-		echo $this->form;
+
+	switch ($this->status) {
+		case 'added':
+			echo $this->userName . ' has been added.';
+			break;
+
+		case 'amended':
+			echo 'Details for user ' . $this->userName . ' have been updated.';
+			break;
+
+		case 'exists':
+			echo 'A user with the name ' . $this->userName . ' already exists.';
+			echo $this->form;
+			break;
+
+		default:
+			$this->form->setAction($this->url());
+			echo $this->form;
+			break;
 	}
 	?>
 	</div>
