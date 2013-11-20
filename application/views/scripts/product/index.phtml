@@ -1,5 +1,14 @@
 <div id="main">
-	<div id="filter-list">
-		<p>Nothing added yet.</p>
-	</div>
+	<?php
+	echo '<div id="product-page-item">';
+	if(is_array($this->productArray)) {
+		foreach ($this->productArray as $columnName=>$columnValue) {
+	        echo $columnValue;
+		}
+	}
+	else {
+		echo $this->productArray;
+	}
+	echo '</div>';
+	?>
 </div>

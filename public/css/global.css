@@ -106,10 +106,19 @@ a:link, a:visited, a:hover, a:active {
 	text-align: center;
 }
 
-.product-name, {
+.product-name, #product-page-name {
 	font-weight: 700;
 	height: 50px;
 	color: #444;
+}
+
+#product-page-name, #product-page-image {
+	width: 431px;
+	height: auto;
+	text-align: center;
+	margin: 0 auto 10px;
+	padding: 10px 0;
+	border: 1px solid #ccc;
 }
 
 .product-price {
@@ -121,15 +130,46 @@ a:link, a:visited, a:hover, a:active {
 	margin: 20px auto 0;
 }
 
+#product-page-item {
+	width: 431px;
+	margin: 0 auto;
+	border: 6px solid #222;
+	padding: 20px 20px 50px 20px;
+}
+
+.product-page-heading {
+	clear: left;
+	background-color: #222;
+	font-size: 16px;
+	color: #fff;
+	width: 151px;
+	height: 30px;
+	margin-bottom: 10px;
+	padding: 12px 0 0 12px;
+}
+
+.product-page-text {
+	float: left;
+	height: auto;
+	margin-bottom: 10px;
+	width: 411px;
+	padding: 10px 10px;
+	border: 1px solid #ccc;
+}
+
 .user-add-div {
 	width: 123px;
 	margin: 0 auto;
 	font-size: 20px;
 }
 
-.user-link-div a {
+.user-link-div a, .product-name a {
 	color: #444;
 	text-decoration: underline;
+}
+
+.product-price a {
+	color: #fff;
 }
 
 #notice {

@@ -1,0 +1,17 @@
+<div id="main">
+	<div id="form-div">
+	<?php
+	// if deleted display success message
+	// else display form
+	if($this->deleted){
+		echo $this->deleted . ' deleted.';
+	}
+	else {
+		echo '<span>Are you sure you wish to delete the user '.
+		$this->userName . '?</span>';
+		$this->form->setAction($this->url());
+		echo $this->form;
+	}
+	?>
+	</div>
+</div>

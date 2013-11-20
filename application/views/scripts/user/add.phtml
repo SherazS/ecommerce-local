@@ -1,8 +1,15 @@
 <div id="main">
 	<div id="form-div">
 	<?php
-	$this->form->setAction($this->url());
-	echo $this->form;
+	// if action completed display success message
+	// else display form
+	if ($this->done) {
+		echo $this->userName . $this->done;
+	}
+	else {
+		$this->form->setAction($this->url());
+		echo $this->form;
+	}
 	?>
 	</div>
 </div>

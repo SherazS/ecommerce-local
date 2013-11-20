@@ -123,12 +123,13 @@ class IndexController extends Zend_Controller_Action
             
             foreach($selectProducts as $product) {
                 $productRow = array();
+                $productRow['product-id'] = $product->getProductId();
                 $productRow['product-name' ] = $product->getProductName();
                 $productRow['product-image'] = '<img src="/images/' . $product->getProductImage() . '" />';
                 $productRow['product-price'] = '£' . $product->getProductPrice();
                 $productArray[] = $productRow;
             }
-
+            
             $this->view->assign('productArray', $productArray);
         }
         else {

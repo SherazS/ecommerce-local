@@ -34,6 +34,7 @@
       <formsDirectory>
         <formFile formName="Product"/>
         <formFile formName="User"/>
+        <formFile formName="DeleteUser"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory/>

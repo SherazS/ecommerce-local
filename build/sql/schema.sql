@@ -15,7 +15,7 @@ CREATE TABLE `product`
     `product_category_id` TINYINT NOT NULL,
     `product_name` VARCHAR(64) NOT NULL,
     `product_image` VARCHAR(64) NOT NULL,
-    `product_description` VARCHAR(64) NOT NULL,
+    `product_description` VARCHAR(256) NOT NULL,
     `product_price` FLOAT NOT NULL,
     `product_quantity` INTEGER NOT NULL,
     PRIMARY KEY (`product_id`),

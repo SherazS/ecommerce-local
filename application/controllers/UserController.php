@@ -50,7 +50,8 @@ class UserController extends Zend_Controller_Action
                 $new->setUserType($type);
                 $new->save();
 
-                echo $username . ' added.';
+                $this->view->assign('userName', $username);
+                $this->view->assign('done', ' added');
             }
         }
         $this->view->assign('form', $form);
@@ -93,10 +94,34 @@ class UserController extends Zend_Controller_Action
                 $userQuery->setUserEmail($newUserEmail);
                 $userQuery->setUserType($newUserType);
                 $userQuery->save();
-
-                echo $newUserName . ' amended.';
+                $this->view->assign('userName', $newUserName);
+                $this->view->assign('done', ' amended');
             }
         }
         $this->view->assign('form', $form);  
+    }
+
+    public function deleteAction()
+    {
+        // prepare form based on selected user
+        $request = $this->getRequest();
+        $userId = $request->getParam('user_id');
+        $form = new Application_Form_DeleteUser();
+ 
+        // find selected user's details
+        $userQuery = UserQuery::create()->findOneByUserId($userId);
+
+        $userName = $userQuery->getUserName();
+        $this->view->assign('userName', $userName);  
+        // if the form is submitted and the inputs are valid
+        // retrieve input data
+        // edit selected user's row and with input data
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $userQuery->delete();
+                $this->view->assign('deleted', $userName);
+            }
+        }
+        $this->view->assign('form', $form); 
     }
 }

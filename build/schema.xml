@@ -5,7 +5,7 @@
     <column name="product_category_id" type="TINYINT" required="true"/>
     <column name="product_name" type="VARCHAR" size="64" required="true"/>
     <column name="product_image" type="VARCHAR" size="64" required="true"/>
-    <column name="product_description" type="VARCHAR" size="64" required="true"/>
+    <column name="product_description" type="VARCHAR" size="256" required="true"/>
     <column name="product_price" type="FLOAT" required="true"/>
     <column name="product_quantity" type="INTEGER" required="true"/>
     <foreign-key foreignTable="category" name="category" phpName="Category" refPhpName="Product">

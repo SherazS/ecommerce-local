@@ -39,10 +39,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
              array('controller' => 'index', 'action' => 'index')
         ));
 
+        // product page router
+        $router->addRoute('product', new Zend_Controller_Router_Route(
+            'product/:product_id',
+             array('controller' => 'product', 'action' => 'index')
+        ));
+
         // edit user profile router
         $router->addRoute('useredit', new Zend_Controller_Router_Route(
             'user/edit/:user_id',
              array('controller' => 'user', 'action' => 'edit')
+        ));
+
+        // delete user profile router
+        $router->addRoute('userdelete', new Zend_Controller_Router_Route(
+            'user/delete/:user_id',
+             array('controller' => 'user', 'action' => 'delete')
         ));
     }    
 }
