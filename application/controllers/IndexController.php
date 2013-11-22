@@ -163,7 +163,7 @@ class IndexController extends Zend_Controller_Action
         foreach ($findProduct->find() as $category) {
                 $categoryArrayRow = array();
                 $categoryArrayRow['category-id'] = $category->getCategory()->getCategoryId();
-                $categoryArrayRow['category-name'] = $category->getCategory()->getCategoryName();
+                $categoryArrayRow['category-name'] = ucwords($category->getCategory()->getCategoryName());
                 $categoryArray[] = $categoryArrayRow;
         }
 

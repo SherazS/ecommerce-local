@@ -1,10 +1,10 @@
 <div id="main">
 	<div id="form-div">
 		<form enctype="multipart/form-data" action="/index/add" method="POST">
-			Product name:
-			<input name="product_name" type="text" /> <br />
-			Product device:
-			<select name="product_device">
+			<div class="product-add-text">Product name:</div>
+			<input class="product-add-input" name="product_name" type="text" /> <br />
+			<div class="product-add-text">Product device:</div>
+			<select class="product-add-input" name="product_device">
 				<?php
   				foreach ($this->deviceArray as $device) {
 					echo '<option value="';
@@ -13,25 +13,25 @@
 				}
 				?>
 			</select><br />
-			Product category:
-			<select name="product_category">
+			<div class="product-add-text">Product category:</div>
+			<select class="product-add-input" name="product_category">
 				<?php
   				foreach ($this->categoryArray as $category) {
-					echo '<option value="';
+					echo '<option class="category-option" value="';
 					echo $category['category-id'] . '">' . $category['category-name'];
 					echo '</option>';
 				}
 				?>
 			</select><br />
-			Product description:
-			<input name="product_description" type="text" /> <br />
-			Product price:
-			<input name="product_price" type="text" /> <br />
-			Product quantity:
-			<input name="product_quantity" type="text" /> <br />
-			Upload image:
-			<input name="product_image" type="file" /> <br />
-			<input type="submit" value="Add product" />
+			<div class="product-add-text">Product description:</div>
+			<input class="product-add-input" name="product_description" type="text" /> <br />
+			<div class="product-add-text">Product price:</div>
+			<input class="product-add-input" name="product_price" type="text" /> <br />
+			<div class="product-add-text">Product quantity:</div>
+			<input class="product-add-input" name="product_quantity" type="text" /> <br />
+			<div class="product-add-text">Upload image:</div>
+			<input class="product-add-input" name="product_image" type="file" /> <br />
+			<input class="product-add-submit" type="submit" value="Add product" />
 		</form>
 	</div>
 </div>

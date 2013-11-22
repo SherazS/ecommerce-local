@@ -161,6 +161,28 @@ a:link, a:visited, a:hover, a:active {
 	border: 1px solid #ccc;
 }
 
+.product-add-text {
+	width: 150px;
+	height: 20px;
+	margin-bottom: 10px;
+	float: left;
+	clear: left;
+}
+
+.product-add-input {
+	width: 280px;
+	height: 20px;
+	margin-bottom: 10px;
+}
+
+.product-add-submit {
+	width: 100px;
+}
+
+.category-option {
+	text-transform: capitalize;
+}
+
 .user-function-div {
 	width: 130px;
 	margin: 0 auto;
