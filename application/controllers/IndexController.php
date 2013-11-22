@@ -181,15 +181,10 @@ class IndexController extends Zend_Controller_Action
             $productPrice = $request->getPost('product_price');
             $productQuantity = $request->getPost('product_quantity');
 
-            try {
-                $productPrices = explode(".", $productPrice);
-                $productPrice = $productPrices[0] . '.' . $productPrices[1];
-                $productPrice = (float)$productPrice;
-            } catch (Exception $e) {
-                
-            }
+            $productPrices = explode(".", $productPrice);
+            $productPrice = $productPrices[0] . '.' . $productPrices[1];
+            $productPrice = (float)$productPrice;
 
-            }
             if ($findProduct->findOneByProductName($productName)) {
                 echo 'Product exists.';
             }
