@@ -181,20 +181,19 @@ class IndexController extends Zend_Controller_Action
             $productPrice = $request->getPost('product_price');
             $productQuantity = $request->getPost('product_quantity');
 
-            $productPrices = explode(".", $productPrice);
-            $productPrice = $productPrices[0] . '.' . $productPrices[1];
             $productPrice = (float)$productPrice;
+            $productQuantity = (integer)$productQuantity;
 
             if ($findProduct->findOneByProductName($productName)) {
-                echo 'Product exists.';
+                echo 'Product already exists.';
             }
-            elseif (!is_float($productPrice) || $productPrice == 0 || strlen($productPrices[1]) > 1) {
-                echo 'Price is empty, not a number, or is missing the pennies value.';
+            elseif ($productPrice == 0 || strlen(substr(strrchr($productPrice, "."), 1)) != 2) {
+                echo 'Price is empty, not a number, or missing two decimal places.';
             }
-            elseif (!is_int($productQuantity)) {
-                echo 'Quantity is not an integer';
+            elseif ($productQuantity == 0) {
+                echo 'Quantity is empty or not a number.';
             }
-            else {
+            elseif ($productName && $productDescription) {
                 try
                 {
                     $adapter = new Zend_File_Transfer_Adapter_Http();
@@ -240,6 +239,9 @@ class IndexController extends Zend_Controller_Action
                     echo "Exception!\n";
                     echo $exc->getMessage();
                 }
+            }
+            else {
+                echo 'Product name or product description missing.';
             }
         }
     }
