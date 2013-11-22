@@ -13,8 +13,8 @@ class IndexController extends Zend_Controller_Action
         // get and set search parameters
         $categoryParam = $this->getRequest()->getParam('category');
         $deviceParam = $this->getRequest()->getParam('device');
-        if ($categoryParam == 'angular') {
-            return $this->forward('angular');
+        if ($categoryParam == 'add') {
+            return $this->forward('add');
         }
         $this->view->assign('selectedCategory', $categoryParam);
         $this->view->assign('selectedDevice', $deviceParam);
@@ -140,30 +140,78 @@ class IndexController extends Zend_Controller_Action
         }
     }
 
-    public function angularAction()
+    public function addAction()
     {
         $request = $this->getRequest();
+
+        $findProduct = ProductQuery::create();
+
+        $deviceArray = array();
+        foreach ($findProduct->find() as $compat) {
+            $compat = $compat->getCompats();
+                foreach ($compat as $device) {
+                    $deviceArrayRow = array();
+                    $deviceArrayRow['device-id'] = $device->getDevice()->getDeviceId();
+                    $deviceArrayRow['device-name'] = $device->getDevice()->getDeviceName();
+                    $deviceArray[] = $deviceArrayRow;
+                }
+        }
+
+        $deviceArray = array_map("unserialize", array_unique(array_map("serialize", $deviceArray)));
+
+        $categoryArray = array();
+        foreach ($findProduct->find() as $category) {
+                $categoryArrayRow = array();
+                $categoryArrayRow['category-id'] = $category->getCategory()->getCategoryId();
+                $categoryArrayRow['category-name'] = $category->getCategory()->getCategoryName();
+                $categoryArray[] = $categoryArrayRow;
+        }
+
+        $categoryArray = array_map("unserialize", array_unique(array_map("serialize", $categoryArray)));
+
+        $this->view->assign('deviceArray', $deviceArray);
+        $this->view->assign('categoryArray', $categoryArray);
+
         if ($request->isPost())
         {
-
             $productName = $request->getPost('product_name');
+            $productDeviceId = $request->getPost('product_device');
             $productCategoryId = $request->getPost('product_category');
-            $productDeviceId = $request->getPost('product_category');
             $productDescription = $request->getPost('product_description');
             $productPrice = $request->getPost('product_price');
             $productQuantity = $request->getPost('product_quantity');
 
-            $findProduct = ProductQuery::create();
+            try {
+                $productPrices = explode(".", $productPrice);
+                $productPrice = $productPrices[0] . '.' . $productPrices[1];
+                $productPrice = (float)$productPrice;
+            } catch (Exception $e) {
+                
+            }
+
+            }
             if ($findProduct->findOneByProductName($productName)) {
                 echo 'Product exists.';
+            }
+            elseif (!is_float($productPrice) || $productPrice == 0 || strlen($productPrices[1]) > 1) {
+                echo 'Price is empty, not a number, or is missing the pennies value.';
+            }
+            elseif (!is_int($productQuantity)) {
+                echo 'Quantity is not an integer';
             }
             else {
                 try
                 {
                     $adapter = new Zend_File_Transfer_Adapter_Http();
                     $adapter->addValidator('Count',false, array('min'=>1, 'max'=>1))
-                    ->addValidator('Size',false,array('max' => '0.5MB'))
-                    ->addValidator('Extension',false,array('extension' => 'jpg','case' => true));
+                        ->addValidator('Size',false,array('max' => '0.5MB'))
+                        ->addValidator('Extension',false,array('extension' => 'jpg','case' => true))
+                        ->addValidator('ImageSize', false,
+                                          array('minwidth' => 300,
+                                                'maxwidth' => 300,
+                                                'minheight' => 300,
+                                                'maxheight' => 300)
+                                          );
                     $adapter->setDestination('./images');
                     $file = $adapter->getFileInfo();
                     foreach($file as $fieldname=>$fileinfo) {
@@ -176,6 +224,7 @@ class IndexController extends Zend_Controller_Action
                             $newProduct->setProductPrice($productPrice);
                             $newProduct->setProductQuantity($productQuantity);
                             $newProduct->setProductImage($fileinfo['name']);
+
                             $newProduct->save();
                             $productId = $findProduct->findOneByProductName($productName)->getProductId();
                             $newCompat = new Compat();

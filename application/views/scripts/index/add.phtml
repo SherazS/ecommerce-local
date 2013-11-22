@@ -1,0 +1,37 @@
+<div id="main">
+	<div id="form-div">
+		<form enctype="multipart/form-data" action="/index/add" method="POST">
+			Product name:
+			<input name="product_name" type="text" /> <br />
+			Product device:
+			<select name="product_device">
+				<?php
+  				foreach ($this->deviceArray as $device) {
+					echo '<option value="';
+					echo $device['device-id'] . '">' . $device['device-name'];
+					echo '</option>';
+				}
+				?>
+			</select><br />
+			Product category:
+			<select name="product_category">
+				<?php
+  				foreach ($this->categoryArray as $category) {
+					echo '<option value="';
+					echo $category['category-id'] . '">' . $category['category-name'];
+					echo '</option>';
+				}
+				?>
+			</select><br />
+			Product description:
+			<input name="product_description" type="text" /> <br />
+			Product price:
+			<input name="product_price" type="text" /> <br />
+			Product quantity:
+			<input name="product_quantity" type="text" /> <br />
+			Upload image:
+			<input name="product_image" type="file" /> <br />
+			<input type="submit" value="Add product" />
+		</form>
+	</div>
+</div>
