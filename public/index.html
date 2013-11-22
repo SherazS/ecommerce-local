@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+	<title>Learning AngularJS</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+var myApp = angular.module('myApp', []);
+
+// Controller included to supply data
+myApp.controller('MainCtrl', ['$scope', function ($scope) {
+    $scope.greeting = 'Todd Motto';
+}]);
+
+myApp.filter('reverse', function () {
+    return function (input, uppercase) {
+        var out = '';
+        for (var i = 0; i < input.length; i++) {
+            out = input.charAt(i) + out;
+        }
+        if (uppercase) {
+            out = out.toUpperCase();
+        }
+        return out;
+    }
+});
+
+myApp.directive('customButton', function () {
+  return {
+    restrict: 'A',
+    replace: true,
+    transclude: true,
+    template: '<a href="#" class="myawesomebutton" ng-transclude>' +
+                '<i class="icon-ok-sign"></i>' +
+              '</a>',
+    link: function (scope, element, attrs) {
+      // DOM manipulation/events here!
+    }
+  };
+});
+	</script>
+</head>
+<body>
+<div ng-app="myApp">
+    <div ng-controller="MainCtrl">
+        <p>No filter: {{ greeting }}</p>
+        <p>Reverse: {{ greeting | reverse }}</p>
+        <a custom-button>Click me</a>
+    </div>
+</div>
+</body>
+</html>

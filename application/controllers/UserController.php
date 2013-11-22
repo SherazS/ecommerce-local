@@ -5,7 +5,7 @@ class UserController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+
     }
 
     public function indexAction()
@@ -107,6 +107,7 @@ class UserController extends Zend_Controller_Action
                     $userQuery->setUserEmail($newUserEmail);
                     $userQuery->setUserType($newUserType);
                     $userQuery->save();
+                    $_SESSION['user']=$newUserName;
                     $this->view->assign('userName', $newUserName);
                     $this->view->assign('status', 'amended');
                 }
@@ -128,9 +129,13 @@ class UserController extends Zend_Controller_Action
         $userName = $userQuery->getUserName();
         $this->view->assign('userName', $userName);  
 
-        // if the form is submitted delete users row
+        // if the form is submitted and valid delete users row
+        // and if the user deleted their own account destroy session
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
+                if($_SESSION['user'] == $userName) {
+                    session_destroy();
+                }
                 $userQuery->delete();
                 $this->view->assign('deleted', $userName);
             }
@@ -155,6 +160,7 @@ class UserController extends Zend_Controller_Action
         // if the form is submitted and the inputs are valid
         // compare attempted hash with actual hash
         // print message accordingly
+        // and create new session if successful
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $username = $request->getPost('username');
@@ -171,6 +177,10 @@ class UserController extends Zend_Controller_Action
                     // correct username and password
                     if ($actualHash === $attemptedHash) {
                         $this->view->assign('success', '');
+                        session_destroy();
+                        session_start();
+                        // store session data
+                        $_SESSION['user']=$username;
                     }
                     // incorrect password
                     else {

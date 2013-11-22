@@ -13,6 +13,9 @@ class IndexController extends Zend_Controller_Action
         // get and set search parameters
         $categoryParam = $this->getRequest()->getParam('category');
         $deviceParam = $this->getRequest()->getParam('device');
+        if ($categoryParam == 'angular') {
+            return $this->forward('angular');
+        }
         $this->view->assign('selectedCategory', $categoryParam);
         $this->view->assign('selectedDevice', $deviceParam);
 
@@ -134,6 +137,66 @@ class IndexController extends Zend_Controller_Action
         }
         else {
             $this->view->assign('productArray', 'Unfortunately we do not have that type of product. Please check back later.');
+        }
+    }
+
+    public function angularAction()
+    {
+        $request = $this->getRequest();
+        if ($request->isPost())
+        {
+
+            $productName = $request->getPost('product_name');
+            $productCategoryId = $request->getPost('product_category');
+            $productDeviceId = $request->getPost('product_category');
+            $productDescription = $request->getPost('product_description');
+            $productPrice = $request->getPost('product_price');
+            $productQuantity = $request->getPost('product_quantity');
+
+            $findProduct = ProductQuery::create();
+            if ($findProduct->findOneByProductName($productName)) {
+                echo 'Product exists.';
+            }
+            else {
+                try
+                {
+                    $adapter = new Zend_File_Transfer_Adapter_Http();
+                    $adapter->addValidator('Count',false, array('min'=>1, 'max'=>1))
+                    ->addValidator('Size',false,array('max' => '0.5MB'))
+                    ->addValidator('Extension',false,array('extension' => 'jpg','case' => true));
+                    $adapter->setDestination('./images');
+                    $file = $adapter->getFileInfo();
+                    foreach($file as $fieldname=>$fileinfo) {
+                        if (($adapter->isUploaded($fileinfo['name']))&& ($adapter->isValid($fileinfo['name']))) {
+                            $adapter->receive($fileinfo['name']);
+                            $newProduct = new Product();
+                            $newProduct->setProductName($productName);
+                            $newProduct->setProductCategoryId($productCategoryId);
+                            $newProduct->setProductDescription($productDescription);
+                            $newProduct->setProductPrice($productPrice);
+                            $newProduct->setProductQuantity($productQuantity);
+                            $newProduct->setProductImage($fileinfo['name']);
+                            $newProduct->save();
+                            $productId = $findProduct->findOneByProductName($productName)->getProductId();
+                            $newCompat = new Compat();
+                            $newCompat->setCompatProductId($productId);
+                            $newCompat->setCompatDeviceId($productDeviceId);
+                            $newCompat->save();
+                            echo 'Product added.<br />';
+                            echo $fileinfo['name'] . ' uploaded successfully.';
+                        }
+                    }
+                    if($adapter->getMessages()) {
+                        foreach($adapter->getMessages() as $message) {
+                            echo $message . '<br />';
+                        }
+                    }
+                }
+                catch (Exception $exc) {
+                    echo "Exception!\n";
+                    echo $exc->getMessage();
+                }
+            }
         }
     }
 }

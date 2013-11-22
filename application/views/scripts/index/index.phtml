@@ -10,10 +10,6 @@
 	        	$style = ' style="border-bottom: 2px solid #444;"';
 	        	$action = 'all';
 	        }
-	        if ($category == $this->selectedCategory) {
-	        	$style = ' style="border-bottom: 2px solid #444;"';
-	        	$action = 'all';
-	        }
 		?>
 
         <div class="filter-link-div">
@@ -79,7 +75,7 @@
 			return $this->id;
 		}
 	}
-
+	
 	if(is_array($this->productArray)) {
 		foreach ($this->productArray as $product) {
 		    echo '<div class="product-item">';

@@ -1,4 +1,11 @@
 <div id="main">
+	<div class="login-div">
+	<?php
+	if(isset($_SESSION['user'])) {
+		echo $_SESSION['user'] . ' is logged in';
+	}
+	?>
+	</div>
 	<div id="form-div">
 	<?php
 	// if action completed display success message
